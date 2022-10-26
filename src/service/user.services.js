@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const generateToken = require('../helpers/tokenCreate');
+const jwtValid = require('../helpers/auth.token');
 
 const createNewUser = async ({ displayName, email, password, image }) => {
 const checkExists = await User.findOne({ where: { email } });
@@ -12,6 +13,19 @@ const token = generateToken.createToken(addNewUser.dataValues); // se tudo estiv
 return { type: null, message: token };
 };
 
+const validateToken = (token) => {
+    if (!token) return { type: 'INVALID_TOKEN', message: 'Token not found' };
+    const result = jwtValid.validateToken(token);
+    return result;
+};
+
+const getAllUser = async () => {
+    const allUser = await User.findAll({ attributes: { exclude: ['password'] } });
+    return allUser;
+};
+
 module.exports = {
     createNewUser,
+    validateToken,
+    getAllUser,
 };
