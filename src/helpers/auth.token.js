@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const validateToken = (token) => {
   try {
-    const { data } = jwt.verify(token, process.env.JWT_SECRET);
+    const data = jwt.verify(token, process.env.JWT_SECRET);
     return { type: null, message: data };
   } catch (error) {
     console.error(error);

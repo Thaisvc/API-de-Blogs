@@ -3,10 +3,9 @@ const { mapError } = require('../helpers/mapError');
 
 const tokenValidate = async (req, res, next) => {
     const { authorization } = req.headers;
-    console.log(authorization);
     const { type, message } = authService.validateToken(authorization);
     if (type) return res.status(mapError(type)).json({ message });
-    req.user = message;
+    req.user = message; // CRIO ESSA PROPRIEDADE USER
   
     next();
 };

@@ -14,7 +14,6 @@ return { type: null, message: token };
 };
 
 const validateToken = (token) => {
-    console.log(token);
     if (!token) return { type: 'INVALID_TOKEN', message: 'Token not found' };
     const result = jwtValid.validateToken(token);
     return result;
