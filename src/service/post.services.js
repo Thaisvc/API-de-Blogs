@@ -12,6 +12,18 @@ const searchAllPost = async () => {
     return allPost;
 };
 
+const getPostById = async (idPost) => {
+    const byIdPost = await BlogPost.findByPk(idPost, {
+        include: [
+            { model: User, as: 'user', attributes: { exclude: ['password'] } },
+            { model: Category, as: 'categories', through: { attributes: [] } },
+        ],
+});
+    if (!byIdPost) return { type: 'NOT_FOUND', message: 'Post does not exist' }; 
+    return { type: null, message: byIdPost };
+};
+
 module.exports = {
     searchAllPost,
+    getPostById,
 };
