@@ -23,38 +23,6 @@ const getPostById = async (idPost) => {
     return { type: null, message: byIdPost };
 };
 
-/* const updateByIdPost = async (id, { title, content }) => {
-    console.log(title, content);
-
-    const findId = await BlogPost.findByPk(id, { where: id === 'id' }); // VERIFICO SE EXIXTE O POSTE
-    if (!findId) return { type: 'NOT_FOUND', message: ' not exist' };
-
-    const [update] = await BlogPost.update( // SE EXISTE ATUALIZO
-        { title, content },
-        { where: { id } },
-      );
-
-     const findIdNew = await BlogPost.findByPk(id, {
-        include: [
-            { model: User, as: 'user', attributes: { exclude: ['password'] } },
-            { model: Category, as: 'categories', through: { attributes: [] } },
-        ],
-    });
-
-    if (!update) return { type: 'INVALID_FIELDS', message: 'not exist' };
-    return { type: null, message: findIdNew };
-};
-
-const findAllBlogPosts = async (id) => {
-    const allBlogPosts = await BlogPost.findByPk(id, {
-        include: [
-            { model: User, as: 'user', attributes: { exclude: ['password'] } },
-            { model: Category, as: 'categories', through: { attributes: [] } },
-        ],
-    });
-  return allBlogPosts;
-  }; */
-
   const getPostsByUserId = async (id) => {
     const result = await BlogPost
         .findOne({ where: { userId: id } });
